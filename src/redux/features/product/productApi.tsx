@@ -21,6 +21,13 @@ const productsApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    updateProduct: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/products/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+    }),
   }),
 })
 
