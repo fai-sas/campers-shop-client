@@ -5,6 +5,7 @@ import ProductsPage from '../pages/ProductsPage'
 import ProductDetails from '../pages/ProductDetails'
 import TestProductPage from '../pages/TestProductPage'
 import ProductManagement from '../pages/ProductManagement'
+import EditProduct from '../pages/EditProduct'
 
 const Route = createBrowserRouter([
   {
@@ -28,13 +29,13 @@ const Route = createBrowserRouter([
         path: '/products/:productId',
         element: <ProductDetails />,
       },
-      // {
-      //   path: '/test-products/:productId',
-      //   element: <ProductDetails />,
-      // },
       {
         path: '/manage-products',
         element: <ProductManagement />,
+      },
+      {
+        path: '/editProduct/:productId',
+        element: <EditProduct />,
       },
     ],
   },

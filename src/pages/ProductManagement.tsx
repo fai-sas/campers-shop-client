@@ -10,6 +10,7 @@ import {
 } from '../redux/features/product/productApi'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+import { Link } from 'react-router-dom'
 
 const ProductManagement = () => {
   const { data, isLoading, isError } = useGetAllProductsQuery(undefined)
@@ -116,9 +117,11 @@ const ProductManagement = () => {
                     {product.category}
                   </td>
                   <td className='px-4 py-2 border-b border-gray-200'>
-                    <button className='px-2 py-1 mr-2 text-white bg-yellow-500 rounded'>
-                      Edit
-                    </button>
+                    <Link to={`/editProduct/${product.key}`}>
+                      <button className='px-2 py-1 mr-2 text-white bg-yellow-500 rounded'>
+                        Edit
+                      </button>
+                    </Link>
                     <button
                       className='px-2 py-1 text-white bg-red-500 rounded'
                       onClick={() => setConfirmDelete(product.key)}
