@@ -1,3 +1,4 @@
+import Test from '../components/Test'
 import { useGetAllProductsQuery } from '../redux/features/product/productApi'
 
 const ProductsPage = () => {
@@ -21,13 +22,16 @@ const ProductsPage = () => {
   }
 
   if (!isLoading && !isError && products?.length > 0) {
-    return (
-      <h1 className='text-2xl font-bold text-red-800 '>
-        {data?.data?.map((item) => {
-          return <li>{item?.name}</li>
-        })}
-      </h1>
-    )
+    return (content = (
+      <div>
+        <Test />
+        <h1 className='text-2xl font-bold text-red-800 '>
+          {data?.data?.map((item) => {
+            return <li>{item?.name}</li>
+          })}
+        </h1>
+      </div>
+    ))
   }
 
   return content
