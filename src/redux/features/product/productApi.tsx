@@ -22,7 +22,7 @@ const productsApi = baseApi.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      // invalidatesTags: ['products'],
+      invalidatesTags: ['products'],
     }),
     updateProduct: builder.mutation({
       query: ({ id, data }) => ({

@@ -5,13 +5,16 @@ import FormInput from '../components/FormInput'
 import { FieldValues, SubmitHandler } from 'react-hook-form'
 import {
   useAddProductMutation,
+  useDeleteProductMutation,
   useGetAllProductsQuery,
 } from '../redux/features/product/productApi'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 const ProductManagement = () => {
   const { data, isLoading, isError } = useGetAllProductsQuery(undefined)
   const [addProduct] = useAddProductMutation()
+  const [deleteProduct, { isSuccess }] = useDeleteProductMutation()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null)
 
@@ -21,6 +24,7 @@ const ProductManagement = () => {
 
   const handleOk = () => {
     document.getElementById('form-submit-button')?.click()
+    toast.success('Product Added!')
   }
 
   const handleCancel = () => {
@@ -41,12 +45,16 @@ const ProductManagement = () => {
       name: item?.name,
       price: item?.price,
       category: item?.category,
-      images: item?.images,
+      image: item?.image,
     })) || []
 
   const handleDelete = (productId: string) => {
     console.log(`Deleting product with id: ${productId}`)
+    if (productId) {
+      deleteProduct(productId)
+    }
     setConfirmDelete(null)
+    toast.error('Product Deleted!')
   }
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -92,13 +100,11 @@ const ProductManagement = () => {
               {productData.map((product) => (
                 <tr key={product.key}>
                   <td className='px-4 py-2 border-b border-gray-200'>
-                    {product.images && product.images.length > 0 && (
-                      <img
-                        src={product.images[0]}
-                        alt='product'
-                        className='object-cover w-16 h-16'
-                      />
-                    )}
+                    <img
+                      src={product?.image}
+                      alt='product'
+                      className='object-cover w-16 h-16'
+                    />
                   </td>
                   <td className='px-4 py-2 border-b border-gray-200'>
                     {product.name}
@@ -119,6 +125,7 @@ const ProductManagement = () => {
                     >
                       Delete
                     </button>
+
                     {confirmDelete === product.key && (
                       <div className='absolute p-4 bg-white rounded shadow-lg'>
                         <p>Are you sure you want to delete this product?</p>
