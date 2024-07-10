@@ -1,15 +1,19 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react'
-
+import { useState, useRef } from 'react'
+import AvatarMenu from './AvatarMenu'
 import { Link, NavLink } from 'react-router-dom'
+import useAuth from '../../Hooks/useAuth'
 
 const Navbar = () => {
+  const { user } = useAuth()
   const [state, setState] = useState(false)
   const navigation = [
-    { title: 'Products', path: '/products' },
-    { title: 'Manage Products', path: '/manage-products' },
-    { title: 'About Us', path: '/about' },
-    { title: 'Cart', path: '/cart' },
+    { title: 'Dashboard', path: '/dashboard' },
+    { title: 'Contact Us', path: '/contact' },
+    !user && { title: 'Login', path: '/login' },
+    // user && { title: `${user?.displayName}` },
   ].filter(Boolean)
 
   return (
@@ -18,11 +22,10 @@ const Navbar = () => {
         <div className='flex items-center justify-between py-3 lg:py-5 lg:block'>
           <Link to='/'>
             <img
-              src='https://thecampercoshop.com/cdn/shop/files/Rectangle_21.jpg?v=1645552519'
-              width={50}
+              src='https://i.ibb.co/sFsCmwx/jobsy-logo.png'
+              width={120}
               height={50}
-              className='rounded-full '
-              alt='logo'
+              alt='Jobsy logo'
             />
           </Link>
           <div className='lg:hidden'>
@@ -80,6 +83,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
             ))}
+            {user && <AvatarMenu />}
           </ul>
         </div>
       </div>

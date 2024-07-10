@@ -3,9 +3,10 @@ import MainLayout from '../layout/MainLayout'
 import HomePage from '../pages/HomePage'
 import ProductsPage from '../pages/ProductsPage'
 import ProductDetails from '../pages/ProductDetails'
-import TestProductPage from '../pages/TestProductPage'
 import ProductManagement from '../pages/ProductManagement'
 import EditProduct from '../pages/EditProduct'
+import CartPage from '../pages/CartPage'
+import AboutPage from '../pages/AboutPage'
 
 const Route = createBrowserRouter([
   {
@@ -22,10 +23,6 @@ const Route = createBrowserRouter([
         element: <ProductsPage />,
       },
       {
-        path: '/test-products',
-        element: <TestProductPage />,
-      },
-      {
         path: '/products/:productId',
         element: <ProductDetails />,
       },
@@ -36,6 +33,14 @@ const Route = createBrowserRouter([
       {
         path: '/editProduct/:productId',
         element: <EditProduct />,
+      },
+      {
+        path: '/cart',
+        element: <CartPage />,
+      },
+      {
+        path: '/about',
+        element: <AboutPage />,
       },
     ],
   },
