@@ -28,6 +28,10 @@ const Route = createBrowserRouter([
         path: '/products/:productId',
         element: <ProductDetails />,
       },
+      // {
+      //   path: '/test-products/:productId',
+      //   element: <ProductDetails />,
+      // },
       {
         path: '/manage-products',
         element: <ProductManagement />,

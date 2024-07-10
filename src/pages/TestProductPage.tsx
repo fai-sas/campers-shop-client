@@ -6,6 +6,7 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons'
 import { Layout, Menu, theme } from 'antd'
+import ProductCard from '../components/ProductCard'
 const { Header, Content, Sider } = Layout
 
 const items = [
@@ -23,33 +24,19 @@ const TestProductPage = () => {
   const { data, isLoading, isError } = useGetAllProductsQuery(undefined)
   const products = data?.data
 
-  let content = null
-
   if (isLoading) {
-    content = <h1 className='text-6xl font-bold text-green-800 '>Loading...</h1>
+    return <h1 className='text-6xl font-bold text-green-800 '>Loading...</h1>
   }
 
   if (!isLoading && isError) {
-    content = <h1 className='text-6xl font-bold text-red-800 '>Error...</h1>
+    return <h1 className='text-6xl font-bold text-red-800 '>Error...</h1>
   }
 
   if (!isLoading && !isError && products?.length === 0) {
-    content = (
+    return (
       <h1 className='text-6xl font-bold text-red-800 '>No Data Found...</h1>
     )
   }
-
-  // if (!isLoading && !isError && products?.length > 0) {
-  //   content = (
-  //     <div>
-  //       <h1 className='text-2xl font-bold text-red-800 '>
-  //         {data?.data?.map((item) => {
-  //           return <li>{item?.name}</li>
-  //         })}
-  //       </h1>
-  //     </div>
-  //   )
-  // }
 
   return (
     <Layout>
@@ -70,21 +57,13 @@ const TestProductPage = () => {
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0 }} />
-        <Content style={{ margin: '24px 16px 0' }}>
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-            }}
-          >
-            <div>
-              <h1 className='text-2xl font-bold text-red-800 '>
-                {data?.data?.map((item) => {
-                  return <li>{item?.name}</li>
-                })}
-              </h1>
-            </div>
+        {/* <Header style={{ padding: 0 }} /> */}
+
+        <Content>
+          <div className='grid grid-cols-1 gap-4 p-8 my-8 md:grid-cols-3'>
+            {data?.data?.map((product) => {
+              return <ProductCard key={product._id} product={product} />
+            })}
           </div>
         </Content>
       </Layout>
