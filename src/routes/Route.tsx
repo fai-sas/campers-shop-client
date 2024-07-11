@@ -7,6 +7,7 @@ import ProductManagement from '../pages/ProductManagement'
 import EditProduct from '../pages/EditProduct'
 import CartPage from '../pages/CartPage'
 import AboutPage from '../pages/AboutPage'
+import ProductsByCategory from '../components/ProductsByCategory'
 
 const Route = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const Route = createBrowserRouter([
       {
         path: '/about',
         element: <AboutPage />,
+      },
+      {
+        path: '/category/:category',
+        element: <ProductsByCategory />,
       },
     ],
   },
