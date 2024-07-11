@@ -1,30 +1,51 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useGetAllProductsQuery } from '../redux/features/product/productApi'
-import React from 'react'
+import { useState, useEffect } from 'react'
 import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
+  SearchOutlined,
+  SortAscendingOutlined,
+  SortDescendingOutlined,
+  ClearOutlined,
 } from '@ant-design/icons'
-import { Layout, Menu, theme } from 'antd'
+import { Layout, Input, Button, Select, Slider, Pagination } from 'antd'
 import ProductCard from '../components/ProductCard'
 import Loader from '../components/Loader'
-const { Header, Content, Sider } = Layout
 
-const items = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  UserOutlined,
-].map((icon, index) => ({
-  key: String(index + 1),
-  icon: React.createElement(icon),
-  label: `nav ${index + 1}`,
-}))
+const { Content, Sider } = Layout
+const { Option } = Select
 
-const TestProductPage = () => {
-  const { data, isLoading, isError } = useGetAllProductsQuery(undefined)
+const ProductPage = () => {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [category, setCategory] = useState('')
+  const [priceRange, setPriceRange] = useState([0, 10000])
+  const [sortOrder, setSortOrder] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+  const [maxPrice, setMaxPrice] = useState(10000000) // Default maximum price
+
+  const { data, isLoading, isError } = useGetAllProductsQuery({
+    searchTerm,
+    category,
+    priceRange,
+    sort: sortOrder,
+    page: currentPage,
+    limit: pageSize,
+  })
+
   const products = data?.data
+
+  useEffect(() => {
+    // Calculate maximum price dynamically from products data
+    if (products?.length > 0) {
+      const maxPriceFromData = Math.max(
+        ...products.map((product) => product.price)
+      )
+      setMaxPrice(maxPriceFromData)
+    }
+  }, [products])
+
+  const totalProducts = data?.meta?.total
+
+  const categories = [...new Set(products?.map((product) => product.category))]
 
   if (isLoading) {
     return <Loader />
@@ -34,10 +55,32 @@ const TestProductPage = () => {
     return <h1 className='text-6xl font-bold text-red-800 '>Error...</h1>
   }
 
-  if (!isLoading && !isError && products?.length === 0) {
-    return (
-      <h1 className='text-6xl font-bold text-red-800 '>No Data Found...</h1>
-    )
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value)
+  }
+
+  const handleCategoryChange = (value) => {
+    setCategory(value)
+  }
+
+  const handlePriceChange = (value) => {
+    setPriceRange(value)
+  }
+
+  const handleSortChange = (value) => {
+    setSortOrder(value)
+  }
+
+  const handleClearFilters = () => {
+    setSearchTerm('')
+    setCategory('')
+    setPriceRange([0, maxPrice])
+    setSortOrder('')
+  }
+
+  const handlePageChange = (page, pageSize) => {
+    setCurrentPage(page)
+    setPageSize(pageSize)
   }
 
   return (
@@ -50,22 +93,81 @@ const TestProductPage = () => {
           console.log(collapsed, type)
         }}
       >
-        <div className='demo-logo-vertical' />
-        <Menu
-          theme='dark'
-          mode='inline'
-          defaultSelectedKeys={['4']}
-          items={items}
-        />
+        <div className='p-4'>
+          <Input
+            placeholder='Search products'
+            prefix={<SearchOutlined />}
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+
+          <Select
+            className='w-full my-4 '
+            placeholder='Filter by category'
+            value={category}
+            onChange={handleCategoryChange}
+          >
+            <Option value=''>All Categories</Option>
+            {categories.map((category) => (
+              <Option key={category} value={category}>
+                {category}
+              </Option>
+            ))}
+          </Select>
+
+          <div className='my-4'>
+            <span className='text-white '>Price Range:</span>
+            <Slider
+              range
+              max={maxPrice}
+              value={priceRange}
+              onChange={handlePriceChange}
+            />
+          </div>
+          <Select
+            className='w-full my-4 text-white'
+            placeholder='Sort by price'
+            value={sortOrder}
+            onChange={handleSortChange}
+          >
+            <Option value=''>Sort by Price</Option>
+            <Option value='priceAsc'>
+              <SortAscendingOutlined /> Price Ascending
+            </Option>
+            <Option value='priceDesc'>
+              <SortDescendingOutlined /> Price Descending
+            </Option>
+          </Select>
+          <Button
+            className='w-full'
+            type='default'
+            icon={<ClearOutlined />}
+            onClick={handleClearFilters}
+          >
+            Clear Filters
+          </Button>
+        </div>
       </Sider>
       <Layout>
-        {/* <Header style={{ padding: 0 }} /> */}
-
         <Content>
+          <div className='p-8'>
+            <Pagination
+              current={currentPage}
+              pageSize={pageSize}
+              total={totalProducts}
+              onChange={handlePageChange}
+            />
+          </div>
           <div className='grid grid-cols-1 gap-4 p-8 my-8 md:grid-cols-3'>
-            {data?.data?.map((product) => {
-              return <ProductCard key={product._id} product={product} />
-            })}
+            {products?.length > 0 ? (
+              products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))
+            ) : (
+              <h1 className='text-6xl font-bold text-red-800 '>
+                No Data Found...
+              </h1>
+            )}
           </div>
         </Content>
       </Layout>
@@ -73,4 +175,4 @@ const TestProductPage = () => {
   )
 }
 
-export default TestProductPage
+export default ProductPage
