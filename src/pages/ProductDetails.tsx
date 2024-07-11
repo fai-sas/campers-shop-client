@@ -34,6 +34,7 @@
 import { useParams } from 'react-router-dom'
 import { useGetSingleProductQuery } from '../redux/features/product/productApi'
 import { Button } from 'antd'
+import Loader from '../components/Loader'
 
 const ProductDetails = () => {
   const { productId } = useParams()
@@ -41,7 +42,7 @@ const ProductDetails = () => {
   const product = data?.data
 
   if (isLoading) {
-    return <h1>Loading</h1>
+    return <Loader />
   }
 
   return (

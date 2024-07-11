@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons'
 import { Layout, Menu, theme } from 'antd'
 import ProductCard from '../components/ProductCard'
+import Loader from '../components/Loader'
 const { Header, Content, Sider } = Layout
 
 const items = [
@@ -26,7 +27,7 @@ const TestProductPage = () => {
   const products = data?.data
 
   if (isLoading) {
-    return <h1 className='text-6xl font-bold text-green-800 '>Loading...</h1>
+    return <Loader />
   }
 
   if (!isLoading && isError) {

@@ -11,6 +11,7 @@ import {
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
+import Loader from '../components/Loader'
 
 const ProductManagement = () => {
   const { data, isLoading, isError } = useGetAllProductsQuery(undefined)
@@ -33,7 +34,7 @@ const ProductManagement = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   if (isError) {
