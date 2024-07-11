@@ -1,5 +1,5 @@
-import { useGetAllProductsQuery } from '../redux/features/product/productApi'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+
 import {
   SearchOutlined,
   SortAscendingOutlined,
@@ -9,18 +9,33 @@ import {
 import { Layout, Input, Button, Select, Slider, Pagination } from 'antd'
 import ProductCard from '../components/ProductCard'
 import Loader from '../components/Loader'
+import {
+  setSearchTerm,
+  setCategory,
+  setPriceRange,
+  setSortOrder,
+  setCurrentPage,
+  setPageSize,
+  setMaxPrice,
+  clearFilters,
+} from '../redux/features/product/productSlice'
+import { useGetAllProductsQuery } from '../redux/features/product/productApi'
+import { useAppDispatch, useAppSelector } from '../redux/hooks'
 
 const { Content, Sider } = Layout
 const { Option } = Select
 
 const ProductPage = () => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [category, setCategory] = useState('')
-  const [priceRange, setPriceRange] = useState([0, 10000])
-  const [sortOrder, setSortOrder] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
-  const [maxPrice, setMaxPrice] = useState(10000000) // Default maximum price
+  const dispatch = useAppDispatch()
+  const {
+    searchTerm,
+    category,
+    priceRange,
+    sortOrder,
+    currentPage,
+    pageSize,
+    maxPrice,
+  } = useAppSelector((state) => state.product)
 
   const { data, isLoading, isError } = useGetAllProductsQuery({
     searchTerm,
@@ -34,18 +49,42 @@ const ProductPage = () => {
   const products = data?.data
 
   useEffect(() => {
-    // Calculate maximum price dynamically from products data
     if (products?.length > 0) {
       const maxPriceFromData = Math.max(
-        ...products.map((product) => product.price)
+        ...products?.map((product) => product.price)
       )
-      setMaxPrice(maxPriceFromData)
+      dispatch(setMaxPrice(maxPriceFromData))
     }
-  }, [products])
+  }, [dispatch, products])
+
+  const categories = [...new Set(products?.map((product) => product.category))]
 
   const totalProducts = data?.meta?.total
 
-  const categories = [...new Set(products?.map((product) => product.category))]
+  const handleSearch = (value) => {
+    dispatch(setSearchTerm(value))
+  }
+
+  const handleCategoryChange = (value) => {
+    dispatch(setCategory(value))
+  }
+
+  const handlePriceChange = (value) => {
+    dispatch(setPriceRange(value))
+  }
+
+  const handleSortChange = (value) => {
+    dispatch(setSortOrder(value))
+  }
+
+  const handleClearFilters = () => {
+    dispatch(clearFilters())
+  }
+
+  const handlePageChange = (page, pageSize) => {
+    dispatch(setCurrentPage(page))
+    dispatch(setPageSize(pageSize))
+  }
 
   if (isLoading) {
     return <Loader />
@@ -55,50 +94,15 @@ const ProductPage = () => {
     return <h1 className='text-6xl font-bold text-red-800 '>Error...</h1>
   }
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value)
-  }
-
-  const handleCategoryChange = (value) => {
-    setCategory(value)
-  }
-
-  const handlePriceChange = (value) => {
-    setPriceRange(value)
-  }
-
-  const handleSortChange = (value) => {
-    setSortOrder(value)
-  }
-
-  const handleClearFilters = () => {
-    setSearchTerm('')
-    setCategory('')
-    setPriceRange([0, maxPrice])
-    setSortOrder('')
-  }
-
-  const handlePageChange = (page, pageSize) => {
-    setCurrentPage(page)
-    setPageSize(pageSize)
-  }
-
   return (
     <Layout>
-      <Sider
-        breakpoint='lg'
-        collapsedWidth='0'
-        onBreakpoint={(broken) => {}}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type)
-        }}
-      >
+      <Sider>
         <div className='p-4'>
           <Input
             placeholder='Search products'
             prefix={<SearchOutlined />}
             value={searchTerm}
-            onChange={handleSearch}
+            onChange={(e) => handleSearch(e.target.value)}
           />
 
           <Select
