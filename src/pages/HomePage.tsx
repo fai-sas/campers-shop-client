@@ -1,4 +1,5 @@
 import Categories from '../components/Categories'
+import Faq from '../components/Faq'
 import Featured from '../components/Featured'
 import Hero from '../components/Hero'
 import Map from '../components/Maps'
@@ -12,6 +13,7 @@ const HomePage = () => {
       <Featured />
       <Categories />
       <Testimonial />
+      <Faq />
       <Teams />
       <Map />
     </>
