@@ -154,6 +154,7 @@ const ProductManagement = () => {
         </div>
       </div>
 
+      {/* create new product */}
       <Modal
         title='Create New Product'
         open={isModalOpen}
@@ -168,20 +169,20 @@ const ProductManagement = () => {
             align='middle'
             style={{ height: '50vh' }}
           >
-            <Col span={8}>
+            <Col span={12}>
               <FormInput type='text' name='name' label='Name' />
               <FormInput type='text' name='category' label='Category' />
               <FormInput type='text' name='description' label='Description' />
-            </Col>
-            <Col span={8}>
               <FormInput type='text' name='image' label='Image' />
+            </Col>
+            <Col span={12}>
               <FormInput type='number' name='price' label='Price' />
               <FormInput type='number' name='stock' label='Stock' />
-            </Col>
-            <Col span={8}>
-              <FormInput type='number' name='quantity' label='Quantity' />
               <FormInput type='number' name='ratings' label='Rating' />
             </Col>
+            {/* <Col span={8}>
+              <FormInput type='number' name='quantity' label='Quantity' />
+            </Col>  */}
           </Row>
           <Button
             id='form-submit-button'
