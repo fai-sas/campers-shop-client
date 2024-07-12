@@ -15,8 +15,8 @@ const Navbar = () => {
   return (
     <header className='sticky top-0 z-50 bg-opacity-80 backdrop-filter backdrop-blur-sm'>
       <div className='items-center max-w-screen-xl px-4 mx-auto gap-x-14 lg:flex lg:px-8'>
-        <div className='flex items-center justify-between py-3 lg:py-5 lg:block'>
-          <Link to='/'>
+        <div className='flex items-center justify-between py-3 lg:py-8 lg:block'>
+          <Link className='flex gap-4' to='/'>
             <img
               src='https://thecampercoshop.com/cdn/shop/files/Rectangle_21.jpg?v=1645552519'
               width={50}
@@ -24,6 +24,7 @@ const Navbar = () => {
               className='rounded-full '
               alt='logo'
             />
+            <h1 className='text-base font-bold md:text-2xl'>Campers Shop</h1>
           </Link>
           <div className='lg:hidden'>
             <button
@@ -74,7 +75,7 @@ const Navbar = () => {
               <li key={idx}>
                 <NavLink
                   to={item.path}
-                  className='block text-gray-700 hover:text-gray-900'
+                  className='block text-lg font-semibold text-gray-700 md:text-xl hover:text-gray-900'
                 >
                   {item.title}
                 </NavLink>
