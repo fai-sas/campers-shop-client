@@ -1,4 +1,5 @@
 import Categories from '../components/Categories'
+import Cta from '../components/Cta'
 import Faq from '../components/Faq'
 import Featured from '../components/Featured'
 import Hero from '../components/Hero'
@@ -12,6 +13,7 @@ const HomePage = () => {
       <Hero />
       <Featured />
       <Categories />
+      <Cta />
       <Testimonial />
       <Faq />
       <Teams />
