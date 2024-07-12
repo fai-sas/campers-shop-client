@@ -2,7 +2,11 @@ import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
-    <section className='container py-8 mx-auto '>
+    <section
+      data-aos='fade-up'
+      data-aos-duration='2000'
+      className='container py-8 mx-auto '
+    >
       <div className='relative flex flex-col py-16 lg:pt-0 lg:flex-col lg:pb-0'>
         <div className='flex flex-col items-start w-full max-w-xl px-4 mx-auto lg:px-8 lg:max-w-screen-xl'>
           <div className='mb-16 lg:my-40 lg:max-w-lg lg:pr-5'>
@@ -34,7 +38,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div className='inset-y-0 right-0 w-full max-w-xl px-4 mx-auto lg:pl-8 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-1/2 lg:max-w-full lg:absolute xl:px-0'>
+        <div className='inset-y-0 right-0 w-full max-w-lg px-4 mx-auto lg:pl-8 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-1/2 lg:max-w-full lg:absolute xl:px-0'>
           <img
             className='object-cover w-full h-56 rounded-lg shadow-lg sm:h-96 lg:h-full'
             src='https://images.unsplash.com/photo-1515444744559-7be63e1600de?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D0'

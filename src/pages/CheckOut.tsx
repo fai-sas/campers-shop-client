@@ -37,7 +37,11 @@ const CheckOut = () => {
   }
 
   return (
-    <section className='container p-8 mx-auto '>
+    <section
+      data-aos='fade-up'
+      data-aos-duration='1000'
+      className='container p-8 mx-auto '
+    >
       <h1 className='py-4 text-2xl font-bold'>Welcome to Checkout</h1>
       <h1 className='pb-3 text-3xl font-bold'>
         Please Provide Information Below

@@ -85,7 +85,11 @@ const ProductManagement = () => {
 
   return (
     <>
-      <div className='container p-4 mx-auto'>
+      <div
+        data-aos='fade-up'
+        data-aos-duration='1000'
+        className='container p-4 mx-auto'
+      >
         <div className='flex items-center justify-between mb-4'>
           <h1 className='text-2xl font-bold'>Manage Product</h1>
           <button

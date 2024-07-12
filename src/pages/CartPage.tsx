@@ -72,7 +72,11 @@ const CartPage = () => {
   }
 
   return (
-    <section className='container p-8 mx-auto bg-white rounded-lg shadow-xl '>
+    <section
+      data-aos='fade-up'
+      data-aos-duration='1000'
+      className='container p-8 mx-auto bg-white rounded-lg shadow-xl '
+    >
       <div className='container max-w-2xl mx-auto'>
         <h1 className='mb-8 text-3xl font-semibold'>Shopping Cart</h1>
         {data?.data?.length === 0 ? (

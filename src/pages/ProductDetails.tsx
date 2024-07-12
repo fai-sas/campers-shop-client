@@ -28,7 +28,11 @@ const ProductDetails = () => {
   }
 
   return (
-    <section className='overflow-hidden text-gray-700 bg-white body-font'>
+    <section
+      data-aos='fade-up'
+      data-aos-duration='1000'
+      className='overflow-hidden text-gray-700 bg-white body-font'
+    >
       <article className='container grid items-center grid-cols-1 p-8 mx-auto place-content-center md:grid-cols-2'>
         <ImageMagnifier src={product?.image} zoom={3} />
 

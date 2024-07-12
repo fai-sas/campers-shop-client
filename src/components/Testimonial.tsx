@@ -2,7 +2,12 @@ import React from 'react'
 
 const Testimonial = () => {
   return (
-    <div className='mt-12 text-gray-600 dark:text-gray-300' id='reviews'>
+    <div
+      data-aos='fade-up'
+      data-aos-duration='2000'
+      className='mt-12 text-gray-600 dark:text-gray-300'
+      id='reviews'
+    >
       <div className='px-6 mx-auto max-w-7xl md:px-12 xl:px-6'>
         <div className='px-6 mb-10 space-y-4 md:px-0'>
           <h2 className='text-2xl font-bold text-center text-gray-800 dark:text-white md:text-4xl'>

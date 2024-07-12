@@ -4,7 +4,11 @@ const ProductCard = ({ product }) => {
   const { _id, name, image, description, price } = product
 
   return (
-    <div className='relative my-8 text-gray-700 bg-white shadow-md rounded-xl bg-clip-border'>
+    <div
+      data-aos='fade-up'
+      // data-aos-duration='2000'
+      className='relative my-8 text-gray-700 bg-white shadow-md rounded-xl bg-clip-border'
+    >
       <div className='rounded-md '>
         <img
           className='object-cover h-[15rem] w-full rounded-md '

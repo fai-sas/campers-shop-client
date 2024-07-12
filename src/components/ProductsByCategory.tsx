@@ -27,7 +27,11 @@ const ProductsByCategory = () => {
       ) : filteredProducts.length === 0 ? (
         <div>No products found for this category</div>
       ) : (
-        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+        <div
+          data-aos='fade-up'
+          data-aos-duration='1000'
+          className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+        >
           {filteredProducts.map((product) => (
             <ProductCard product={product} />
           ))}

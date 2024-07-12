@@ -2,7 +2,11 @@ import { Link } from 'react-router-dom'
 
 const Cta = () => {
   return (
-    <div className='relative z-20 flex items-center my-8 overflow-hidden bg-white dark:bg-gray-800'>
+    <div
+      data-aos='fade-up'
+      data-aos-duration='2000'
+      className='relative z-20 flex items-center my-8 overflow-hidden bg-white dark:bg-gray-800'
+    >
       <div className='container relative flex px-6 py-16 mx-auto max-w-7xl md:px-12 xl:px-6'>
         <div className='relative z-20 flex flex-col sm:w-2/3 lg:w-2/5'>
           <span className='w-20 h-2 mb-12 bg-gray-800 dark:bg-white'></span>

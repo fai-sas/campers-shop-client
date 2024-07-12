@@ -1,6 +1,10 @@
 const Mission = () => {
   return (
-    <section className='py-12 bg-gray-200'>
+    <section
+      data-aos='fade-up'
+      data-aos-duration='1000'
+      className='py-12 bg-gray-200'
+    >
       <div className='flex flex-col items-center px-5 py-8 mx-auto max-w-7xl'>
         <div className='flex flex-col w-full mb-8 prose text-left max-w-max lg:max-w-2xl'>
           <div className='w-full mx-auto'>

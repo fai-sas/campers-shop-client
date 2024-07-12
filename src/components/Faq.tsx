@@ -1,4 +1,3 @@
-import React from 'react'
 import { Collapse } from 'antd'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 
@@ -6,7 +5,11 @@ const { Panel } = Collapse
 
 const Faq = () => {
   return (
-    <div className='container p-8 mx-auto'>
+    <div
+      data-aos='fade-up'
+      data-aos-duration='2000'
+      className='container p-8 mx-auto'
+    >
       <div className='flex flex-col items-start w-full max-w-xl px-4 py-8 mx-auto lg:px-8 lg:max-w-screen-xl'>
         <div className='grid gap-10 my-8 md:grid-cols-5'>
           <div className='md:col-span-2'>
