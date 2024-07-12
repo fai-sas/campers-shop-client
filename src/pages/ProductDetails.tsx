@@ -1,45 +1,30 @@
-// import { useParams } from 'react-router-dom'
-// import { useGetSingleProductQuery } from '../redux/features/product/productApi'
-// import { Button } from 'antd'
-
-// const ProductDetails = () => {
-//   const { productId } = useParams()
-//   const { data, isLoading, isError } = useGetSingleProductQuery(productId)
-//   const product = data?.data
-
-//   return (
-//     <main>
-//       <section className='grid grid-cols-1 md:grid-cols-2'>
-//         {/* image */}
-//         <article>
-//           <img src={product?.image} alt={product?.name} />
-//         </article>
-//         {/* details */}
-//         <article>
-//           <h3>{product?.category}</h3>
-//           <h2>{product?.name}</h2>
-//           <h3>{product?.ratings}</h3>
-//           <h3>{product?.description}</h3>
-//           <p>${product?.price}</p>
-//           <h3>{product?.stock}</h3>
-//           <Button htmlType='submit'>Add To Cart</Button>
-//         </article>
-//       </section>
-//     </main>
-//   )
-// }
-
-// export default ProductDetails
-
 import { useParams } from 'react-router-dom'
 import { useGetSingleProductQuery } from '../redux/features/product/productApi'
 import { Button } from 'antd'
 import Loader from '../components/Loader'
+import { useAddCartMutation } from '../redux/features/cart/cartApi'
+import { FieldValues, SubmitHandler } from 'react-hook-form'
+import FormController from '../components/FormController'
+import FormInput from '../components/FormInput'
+import toast from 'react-hot-toast'
 
 const ProductDetails = () => {
   const { productId } = useParams()
-  const { data, isLoading, isError } = useGetSingleProductQuery(productId)
+  console.log(productId)
+
+  const { data, isLoading } = useGetSingleProductQuery(productId)
+  const [addCart] = useAddCartMutation()
+
   const product = data?.data
+
+  const handleAddToCart = async () => {
+    try {
+      await addCart({ cartProduct: productId }).unwrap()
+      toast.success('Product added to cart successfully!')
+    } catch (error) {
+      toast.error('Failed to add product to cart')
+    }
+  }
 
   if (isLoading) {
     return <Loader />
@@ -145,8 +130,8 @@ const ProductDetails = () => {
               <span className='text-2xl font-medium text-gray-900 title-font'>
                 ${product?.price}
               </span>
-              <Button className='flex px-6 py-2 ml-auto text-white bg-red-500 border-0 rounded focus:outline-none hover:bg-red-600'>
-                Add To Cart
+              <Button type='primary' className='ml-4' onClick={handleAddToCart}>
+                Add to Cart
               </Button>
             </div>
           </div>
