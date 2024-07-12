@@ -50,6 +50,23 @@ const CartPage = () => {
     setTotalPrice(calculateTotalPrice())
   }, [data])
 
+  useEffect(() => {
+    setTotalPrice(calculateTotalPrice())
+  }, [data])
+
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault()
+      e.returnValue = 'Are you sure you want to leave? Your Cart will be Empty.'
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [])
+
   if (isLoading) {
     return <Loader />
   }
