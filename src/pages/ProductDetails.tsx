@@ -19,10 +19,10 @@ const ProductDetails = () => {
 
   const handleAddToCart = async () => {
     try {
-      await addCart({ cartProduct: productId }).unwrap()
+      await addCart({ cartProduct: productId, quantity: 1 }).unwrap()
       toast.success('Product added to cart successfully!')
     } catch (error) {
-      toast.error('Failed to add product to cart')
+      toast.error(error?.data?.message || 'Failed to add product to cart')
     }
   }
 
@@ -130,7 +130,12 @@ const ProductDetails = () => {
               <span className='text-2xl font-medium text-gray-900 title-font'>
                 ${product?.price}
               </span>
-              <Button type='primary' className='ml-4' onClick={handleAddToCart}>
+              <Button
+                type='primary'
+                className='ml-4'
+                onClick={handleAddToCart}
+                disabled={product?.stock === 0}
+              >
                 Add to Cart
               </Button>
             </div>
