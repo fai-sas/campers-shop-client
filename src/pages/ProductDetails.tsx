@@ -3,9 +3,6 @@ import { useGetSingleProductQuery } from '../redux/features/product/productApi'
 import { Button } from 'antd'
 import Loader from '../components/Loader'
 import { useAddCartMutation } from '../redux/features/cart/cartApi'
-import { FieldValues, SubmitHandler } from 'react-hook-form'
-import FormController from '../components/FormController'
-import FormInput from '../components/FormInput'
 import toast from 'react-hot-toast'
 
 const ProductDetails = () => {
