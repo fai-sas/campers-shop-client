@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Col, Row } from 'antd'
+import { Button, Col, Pagination, Row } from 'antd'
 import FormController from '../components/FormController'
 import FormInput from '../components/FormInput'
 import {
@@ -13,8 +13,6 @@ import toast from 'react-hot-toast'
 const EditProduct = () => {
   const navigate = useNavigate()
   const { productId } = useParams<{ productId: string }>()
-
-  console.log(productId)
 
   if (!productId) {
     return <div>No product ID found</div>
@@ -53,32 +51,38 @@ const EditProduct = () => {
   }
 
   return (
-    <FormController onSubmit={onSubmit} defaultValues={defaultValues}>
-      <Row
-        justify='center'
-        gutter={16}
-        align='middle'
-        style={{ height: '50vh' }}
-      >
-        <Col span={8}>
-          <FormInput type='text' name='name' label='Name' />
-          <FormInput type='text' name='category' label='Category' />
-          <FormInput type='text' name='description' label='Description' />
-        </Col>
-        <Col span={8}>
-          <FormInput type='text' name='image' label='Image' />
-          <FormInput type='number' name='price' label='Price' />
-          <FormInput type='number' name='stock' label='Stock' />
-        </Col>
-        <Col span={8}>
-          <FormInput type='number' name='quantity' label='Quantity' />
-          <FormInput type='number' name='ratings' label='Rating' />
-        </Col>
-      </Row>
-      <Button htmlType='submit' disabled={isLoading}>
-        Edit Product
-      </Button>
-    </FormController>
+    <section className='container p-8 mx-auto '>
+      <div className='w-full max-w-xl px-4 py-8 mx-auto lg:px-8 lg:max-w-screen-xl'>
+        <FormController onSubmit={onSubmit} defaultValues={defaultValues}>
+          <Row
+            justify='center'
+            gutter={16}
+            align='middle'
+            style={{ height: '50vh' }}
+          >
+            <Col span={12}>
+              <FormInput type='text' name='name' label='Name' />
+              <FormInput type='text' name='category' label='Category' />
+              <FormInput type='text' name='description' label='Description' />
+              <FormInput type='text' name='image' label='Image' />
+            </Col>
+            <Col span={12}>
+              <FormInput type='number' name='price' label='Price' />
+              <FormInput type='number' name='stock' label='Stock' />
+              <FormInput type='number' name='ratings' label='Rating' />
+            </Col>
+            <Button
+              className='text-lg font-bold '
+              type='primary'
+              htmlType='submit'
+              disabled={isLoading}
+            >
+              Edit Product
+            </Button>
+          </Row>
+        </FormController>
+      </div>
+    </section>
   )
 }
 

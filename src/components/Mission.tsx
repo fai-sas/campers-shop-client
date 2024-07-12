@@ -1,11 +1,11 @@
 const Mission = () => {
   return (
-    <section className='py-12 bg-green-100'>
+    <section className='py-12 bg-gray-200'>
       <div className='flex flex-col items-center px-5 py-8 mx-auto max-w-7xl'>
         <div className='flex flex-col w-full mb-8 prose text-left max-w-max lg:max-w-2xl'>
           <div className='w-full mx-auto'>
             <h1 className='mb-4 text-4xl font-extrabold text-center'>
-              Our Mission Statement
+              Our Mission
             </h1>
             <h2 className='mb-6 text-2xl font-semibold text-center'>
               Connecting campers with the best outdoor gear

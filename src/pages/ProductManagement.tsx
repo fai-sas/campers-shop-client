@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Col, Row, Modal } from 'antd'
+import { Button, Col, Row, Modal, Pagination } from 'antd'
 import FormController from '../components/FormController'
 import FormInput from '../components/FormInput'
 import { FieldValues, SubmitHandler } from 'react-hook-form'
@@ -12,13 +12,32 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import Loader from '../components/Loader'
+import { useAppDispatch, useAppSelector } from '../redux/hooks'
+import {
+  setCurrentPage,
+  setPageSize,
+} from '../redux/features/product/productSlice'
 
 const ProductManagement = () => {
-  const { data, isLoading, isError } = useGetAllProductsQuery(undefined)
+  const dispatch = useAppDispatch()
+
+  const { currentPage, pageSize } = useAppSelector((state) => state.product)
+
+  const { data, isLoading, isError } = useGetAllProductsQuery({
+    page: currentPage,
+    limit: pageSize,
+  })
   const [addProduct] = useAddProductMutation()
-  const [deleteProduct, { isSuccess }] = useDeleteProductMutation()
+  const [deleteProduct] = useDeleteProductMutation()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null)
+
+  const totalProducts = data?.meta?.total
+
+  const handlePageChange = (page, pageSize) => {
+    dispatch(setCurrentPage(page))
+    dispatch(setPageSize(pageSize))
+  }
 
   const showModal = () => {
     setIsModalOpen(true)
@@ -60,7 +79,6 @@ const ProductManagement = () => {
   }
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data)
     await addProduct(data)
     setIsModalOpen(false)
   }
@@ -74,8 +92,16 @@ const ProductManagement = () => {
             onClick={showModal}
             className='px-4 py-2 text-white bg-blue-500 rounded'
           >
-            Create New Product
+            Add New Product
           </button>
+          <div className='p-8'>
+            <Pagination
+              current={currentPage}
+              pageSize={pageSize}
+              total={totalProducts}
+              onChange={handlePageChange}
+            />
+          </div>
         </div>
         <div className='overflow-x-auto'>
           <table className='min-w-full bg-white'>
