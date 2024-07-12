@@ -46,7 +46,7 @@ const cartApi = baseApi.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: ['cart'],
+      invalidatesTags: ['cart', 'products'],
     }),
     updateCart: builder.mutation({
       query: ({ id, data }) => ({
