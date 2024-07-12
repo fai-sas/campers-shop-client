@@ -96,7 +96,14 @@ const ProductPage = () => {
 
   return (
     <Layout>
-      <Sider>
+      <Sider
+        breakpoint='lg'
+        collapsedWidth='0'
+        onBreakpoint={(broken) => {}}
+        onCollapse={(collapsed, type) => {
+          console.log(collapsed, type)
+        }}
+      >
         <div className='p-4'>
           <Input
             placeholder='Search products'

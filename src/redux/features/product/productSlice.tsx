@@ -6,7 +6,7 @@ const initialState = {
   priceRange: [0, 10000000],
   sortOrder: '',
   currentPage: 1,
-  pageSize: 10,
+  pageSize: 9,
   maxPrice: 10000000,
 }
 
@@ -41,7 +41,7 @@ const productSlice = createSlice({
       state.priceRange = [0, state.maxPrice]
       state.sortOrder = ''
       state.currentPage = 1
-      state.pageSize = 10
+      state.pageSize = 9
       state.maxPrice = 10000000
     },
   },
