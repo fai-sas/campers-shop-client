@@ -10,12 +10,13 @@ import AboutPage from '../pages/AboutPage'
 import ProductsByCategory from '../components/ProductsByCategory'
 import CheckOut from '../pages/CheckOut'
 import Success from '../pages/Success'
+import ErrorPage from '../pages/ErrorPage'
 
 const Route = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
-    // errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',

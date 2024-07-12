@@ -55,7 +55,7 @@ const CartPage = () => {
   }
 
   return (
-    <section className='py-12 bg-white'>
+    <section className='container p-8 mx-auto bg-white rounded-lg shadow-xl '>
       <div className='container max-w-2xl mx-auto'>
         <h1 className='mb-8 text-3xl font-semibold'>Shopping Cart</h1>
         {data?.data?.length === 0 ? (
@@ -112,7 +112,8 @@ const CartPage = () => {
                     }
                     disabled={
                       !item.cartProduct ||
-                      item.quantity >= item.cartProduct.stock
+                      item.quantity >= item.cartProduct.stock ||
+                      isLoading
                     }
                     className='px-2 py-1 mr-4 text-white bg-gray-500 rounded disabled:opacity-50'
                   >
