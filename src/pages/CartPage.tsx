@@ -7,8 +7,10 @@ import {
 } from '../redux/features/cart/cartApi'
 import { Button } from 'antd'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const CartPage = () => {
+  const navigate = useNavigate()
   const { data, isLoading } = useGetAllCartsQuery(undefined)
   const [updateCart] = useUpdateCartMutation()
   const [deleteCart] = useDeleteCartMutation()
@@ -131,7 +133,11 @@ const CartPage = () => {
               <p className='text-lg'>Total: ${totalPrice.toFixed(2)}</p>
             </div>
             <div className='mt-8'>
-              <Button className='py-6 text-lg font-bold' type='primary'>
+              <Button
+                onClick={() => navigate(`/checkout`)}
+                className='py-6 text-lg font-bold'
+                type='primary'
+              >
                 Place Order
               </Button>
             </div>

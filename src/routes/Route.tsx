@@ -8,6 +8,8 @@ import EditProduct from '../pages/EditProduct'
 import CartPage from '../pages/CartPage'
 import AboutPage from '../pages/AboutPage'
 import ProductsByCategory from '../components/ProductsByCategory'
+import CheckOut from '../pages/CheckOut'
+import Success from '../pages/Success'
 
 const Route = createBrowserRouter([
   {
@@ -46,6 +48,14 @@ const Route = createBrowserRouter([
       {
         path: '/category/:category',
         element: <ProductsByCategory />,
+      },
+      {
+        path: '/checkout',
+        element: <CheckOut />,
+      },
+      {
+        path: '/success',
+        element: <Success />,
       },
     ],
   },

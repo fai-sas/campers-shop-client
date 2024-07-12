@@ -5,8 +5,9 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className='relative my-8 text-gray-700 bg-white shadow-md rounded-xl bg-clip-border'>
-      <div className='relative mx-4 -mt-6 overflow-hidden text-white shadow-lg h-80 rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600'>
+      <div className='rounded-md '>
         <img
+          className='object-cover h-[15rem] w-full rounded-md '
           src={
             image ||
             'https://i5.walmartimages.com/seo/Better-Homes-Gardens-Mira-Swivel-Chair-Cream_51bf8cde-3692-4821-a735-be282022e068.309726e63c3a4f3ab95fc795e9270f64.jpeg'
@@ -18,11 +19,11 @@ const ProductCard = ({ product }) => {
         <h5 className='block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900'>
           {name}
         </h5>
+        <p className='py-4 text-lg font-bold'>${price}</p>
         <article className='flex justify-between '>
           <p className='block font-sans text-base antialiased font-light leading-relaxed text-inherit'>
             {description}
           </p>
-          <p>${price}</p>
         </article>
       </div>
       <div className='p-6 pt-0'>

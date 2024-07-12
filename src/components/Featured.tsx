@@ -50,12 +50,14 @@ const Featured = () => {
   }
 
   return (
-    <section className='container px-8 mx-auto'>
-      <h1 className='text-2xl font-bold '>Featured Products</h1>
-      <div className='grid grid-cols-1 gap-4 p-8 my-8 md:grid-cols-3'>
-        {randomProducts.map((product) => (
-          <ProductCard key={product?._id} product={product} />
-        ))}
+    <section className='container p-8 mx-auto mt-12'>
+      <div className='flex flex-col items-start w-full max-w-xl px-4 mx-auto lg:px-8 lg:max-w-screen-xl'>
+        <h1 className='text-2xl font-bold '>Featured Products</h1>
+        <div className='grid grid-cols-1 gap-4 my-8 md:grid-cols-3'>
+          {randomProducts.map((product) => (
+            <ProductCard key={product?._id} product={product} />
+          ))}
+        </div>
       </div>
     </section>
   )

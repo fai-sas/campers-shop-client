@@ -169,7 +169,7 @@ const ProductPage = () => {
               onChange={handlePageChange}
             />
           </div>
-          <div className='grid grid-cols-1 gap-4 p-8 my-8 md:grid-cols-3'>
+          <div className='grid grid-cols-1 gap-4 p-8 my-8 md:grid-cols-3 lg:grid-cols-4'>
             {products?.length > 0 ? (
               products.map((product) => (
                 <ProductCard key={product._id} product={product} />
